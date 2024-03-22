@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Casa nova",
   description: "Site de casa nova de Bárbara e Victor",
+
 };
 
 export default function RootLayout({
