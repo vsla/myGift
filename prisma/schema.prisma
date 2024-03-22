@@ -14,4 +14,5 @@ model Product {
   gifted      Boolean @default(false)
   giftedBy    String?
   description String
+  category    String
 }

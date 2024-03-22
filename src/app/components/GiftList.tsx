@@ -20,7 +20,7 @@ export const GiftList = ({ products }: GiftListProps) => {
 
   return (
     <>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <ul className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {products?.map(product => (
           <GiftCard key={product.id} product={product} handleGift={handleGift} />
         ))}
@@ -31,8 +31,7 @@ export const GiftList = ({ products }: GiftListProps) => {
         onClose={() => {
           setProductId(null)
           setPromptOpen(false)
-        }
-        }
+        }}
       />
     </>
   )
