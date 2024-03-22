@@ -1,11 +1,11 @@
 'use client'
 import React, { useState } from 'react'
-import { Product } from '../page';
+import { Product } from '../types';
 import { GiftCard } from './GiftCard';
 import Prompt from './Prompt';
 
-type GiftListProps = {
-  products: Product[]
+interface GiftListProps {
+  products: Array<Product>
 }
 
 export const GiftList = ({ products }: GiftListProps) => {

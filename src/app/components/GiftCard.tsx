@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { Product } from '../page'
+import { Product } from '../types'
 
 interface GiftCardProps {
   product: Product;
