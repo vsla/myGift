@@ -28,14 +28,14 @@ const Prompt: React.FC<PromptProps> = ({ isOpen, onClose, id }) => {
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
           <div className="bg-white p-4 rounded-md shadow-md">
             <h2 className="text-lg text-cyan-950 font-bold">Caso queira colocar seu nome</h2>
-            <p className="text-sm text-cyan-500 mb-2">
-              Pode não colocar e deixar secreto 😃</p>
+            <p className="text-xs text-cyan-500 mb-4">
+              Sem nome fica um presente surpresa 😃</p>
             <input
               type="text"
               placeholder='Seu nome'
               value={name}
               onChange={e => setName(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md mb-2 text-cyan-950"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md mb-4 text-cyan-950 text-sm"
             />
             <div className="flex justify-end">
               <button

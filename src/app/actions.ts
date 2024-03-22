@@ -9,8 +9,6 @@ type addBuyerProps = {
 }
 
 export async function addBuyer({ name, id }: addBuyerProps) {
-
-
   const newProduct = await prisma.product.update({
     where: {
       id

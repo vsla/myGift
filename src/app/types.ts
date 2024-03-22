@@ -5,4 +5,5 @@ export interface Product {
   description: string;
   gifted: boolean;
   giftedBy: string | null;
+  category: string
 }
