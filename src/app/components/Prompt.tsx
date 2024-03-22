@@ -30,11 +30,6 @@ const Prompt: React.FC<PromptProps> = ({ isOpen, onClose,
     navigator.clipboard.writeText(pixNumber.toString());
   };
 
-  const ptPrice = new Intl.NumberFormat('pt-br', {
-    style: 'currency',
-    currency: 'USD',
-  });
-
   const handleSubmit = async () => {
     if (id) {
       addBuyer({ id, name });
