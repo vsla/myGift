@@ -1,10 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
-import { Product } from '../types'
+import { Product, ProductModalData } from '../types'
 
 interface GiftCardProps {
   product: Product;
-  handleGift(id: number): any
+  handleGift(productData: ProductModalData): any
 }
 
 export const GiftCard = ({
@@ -14,10 +14,23 @@ export const GiftCard = ({
     name,
     description,
     gifted,
-    giftedBy
+    giftedBy,
+    price,
+    productLink,
   },
   handleGift
 }: GiftCardProps) => {
+
+  const handleOpenModalPresent = () => {
+    const productModalData: ProductModalData = {
+      id,
+      imgUrl,
+      productName: name,
+      price,
+      productLink,
+    }
+    handleGift(productModalData)
+  }
 
   return (
     <>
@@ -35,7 +48,7 @@ export const GiftCard = ({
         ) : (
           <div className='flex justify-center'>
             <button
-              onClick={() => handleGift(id)}
+              onClick={handleOpenModalPresent}
               className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
             >
               Presentear

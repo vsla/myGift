@@ -15,4 +15,6 @@ model Product {
   giftedBy    String?
   description String
   category    String
+  price       Float
+  productLink String
 }

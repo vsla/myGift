@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { Product } from '../types';
+import { Product, ProductModalData } from '../types';
 import { GiftCard } from './GiftCard';
 import Prompt from './Prompt';
 
@@ -8,14 +8,22 @@ interface GiftListProps {
   productsByCategory: { [key: string]: Array<Product> }
 }
 
+
 export const GiftList = ({ productsByCategory }: GiftListProps) => {
+  const intialProductData = {
+    id: 0,
+    imgUrl: '',
+    productName: '',
+    price: 0,
+    productLink: ''
+  }
+
   const [promptOpen, setPromptOpen] = useState(false);
-  const [productId, setProductId] = useState<number | null>(null);
+  const [productData, setProductData] = useState<ProductModalData>(intialProductData);
 
-
-  const handleGift = async (id: number) => {
+  const handleGift = async (productData: ProductModalData) => {
     setPromptOpen(true);
-    setProductId(id)
+    setProductData(productData)
   };
 
   return (
@@ -39,10 +47,10 @@ export const GiftList = ({ productsByCategory }: GiftListProps) => {
 
 
       <Prompt
-        id={productId}
+        productData={productData}
         isOpen={promptOpen}
         onClose={() => {
-          setProductId(null)
+          setProductData(intialProductData)
           setPromptOpen(false)
         }}
       />
