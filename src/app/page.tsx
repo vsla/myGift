@@ -11,8 +11,17 @@ interface StringMap { [key: string]: Product[]; }
 
 
 const Home = async () => {
-  const products = await prisma.product.findMany();
+  const products = await prisma.product.findMany(
+    {
+      orderBy: [
+        {
+          price: 'desc',
+        },
 
+      ]
+    }
+  );
+  console.log(products)
   const byCategoryProducts: StringMap = {}
 
   products.map((product) => {
