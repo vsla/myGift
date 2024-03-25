@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { addBuyer } from '@/app/actions';
 import Image from 'next/image';
@@ -19,6 +19,7 @@ const Prompt: React.FC<PromptProps> = ({ isOpen, onClose,
 }) => {
   const router = useRouter();
   const [name, setName] = useState('');
+  const promptRef = useRef<HTMLDivElement>(null);
 
   const address = 'Rua rodrigues Ferreira, 45, Bloco A apt 303, Várzea';
   const pixNumber = 12805436474; // Example PIX number
@@ -34,19 +35,38 @@ const Prompt: React.FC<PromptProps> = ({ isOpen, onClose,
 
   const handleSubmit = async () => {
     if (id) {
-      addBuyer({ id, name });
+      await addBuyer({ id, name });
 
-      router.refresh();
+
       onClose();
+      router.refresh();
     }
   };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (promptRef.current && !promptRef.current.contains(event.target as Node)) {
+      onClose();
+    }
+  }
+
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
 
   return (
     <>
       {isOpen && (
 
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
-          <div className="bg-white p-4 rounded-md shadow-md m-2">
+        <div className="cursor-pointer fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+          <div ref={promptRef} className=" cursor-default bg-white p-4 rounded-md shadow-md m-2">
             <h2 className="text-lg text-cyan-950 font-bold center text-center">Quero presentear</h2>
             <h3 className="text-sm text-cyan-950 font-bold text-center">Pode comprar o produto ou mandar o pix</h3>
 
