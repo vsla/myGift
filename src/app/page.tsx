@@ -1,37 +1,10 @@
 import React from 'react';
 
-import { PrismaClient } from '@prisma/client';
 import { GiftList } from './components/GiftList';
-import { Product } from './types';
-
-
-const prisma = new PrismaClient();
-
-interface StringMap { [key: string]: Product[]; }
-
+import { getProducts } from './actions';
 
 const Home = async () => {
-  const products = await prisma.product.findMany(
-    {
-      orderBy: [
-        {
-          price: 'desc',
-        },
-
-      ]
-    }
-  );
-  console.log(products)
-  const byCategoryProducts: StringMap = {}
-
-  products.map((product) => {
-    const productCategory = product.category
-    if (!byCategoryProducts[productCategory]) {
-      byCategoryProducts[productCategory] = [product]
-    } else {
-      byCategoryProducts[productCategory] = [...byCategoryProducts[productCategory], product]
-    }
-  })
+  const byCategoryProducts = await getProducts()
 
   return (
     <div className="container mx-auto p-4">
