@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { addBuyer } from '@/app/actions';
 import Image from 'next/image';
 import { ProductModalData } from '../types';
@@ -16,6 +17,7 @@ const Prompt: React.FC<PromptProps> = ({ isOpen, onClose,
     id, imgUrl, productName, price, productLink
   }
 }) => {
+  const router = useRouter();
   const [name, setName] = useState('');
 
   const address = 'Rua rodrigues Ferreira, 45, Bloco A apt 303, Várzea';
@@ -34,7 +36,7 @@ const Prompt: React.FC<PromptProps> = ({ isOpen, onClose,
     if (id) {
       addBuyer({ id, name });
 
-      revalidatePath('/')
+      router.prefetch('/');
       onClose();
     }
   };

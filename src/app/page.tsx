@@ -2,6 +2,7 @@ import React from 'react';
 
 import { GiftList } from './components/GiftList';
 import { getProducts } from './actions';
+export const revalidate = 1
 
 const Home = async () => {
   const byCategoryProducts = await getProducts()
