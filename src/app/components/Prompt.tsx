@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { addBuyer } from '@/app/actions';
+
 import Image from 'next/image';
 import { ProductModalData } from '../types';
 
@@ -9,6 +9,26 @@ interface PromptProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+
+
+type addBuyerProps = {
+  name?: string;
+  id: number
+}
+
+async function addBuyer({
+  name, id
+}: addBuyerProps) {
+  const response = await fetch('http://localhost:3000/api', {
+    method: 'PUT',
+    body:
+      JSON.stringify({ name, id })
+  })
+
+  return response.json()
+}
+
 
 const Prompt: React.FC<PromptProps> = ({ isOpen, onClose,
   productData: {
@@ -30,9 +50,12 @@ const Prompt: React.FC<PromptProps> = ({ isOpen, onClose,
     navigator.clipboard.writeText(pixNumber.toString());
   };
 
+
+
   const handleSubmit = async () => {
     if (id) {
-      addBuyer({ id, name });
+
+      await addBuyer({ id, name });
 
       router.refresh();
       onClose();

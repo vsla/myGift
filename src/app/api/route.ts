@@ -32,3 +32,21 @@ export async function GET() {
   })
   return Response.json(byCategoryProducts)
 }
+
+
+
+export async function PUT(request: Request) {
+  const { name, id } = await request.json()
+
+
+  const newProduct = await prisma.product.update({
+    where: {
+      id
+    },
+    data: {
+      gifted: true,
+      giftedBy: name || ''
+    },
+  });
+  return Response.json(newProduct)
+}
