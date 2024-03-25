@@ -36,7 +36,7 @@ const Prompt: React.FC<PromptProps> = ({ isOpen, onClose,
     if (id) {
       addBuyer({ id, name });
 
-      router.prefetch('/');
+      router.refresh();
       onClose();
     }
   };
