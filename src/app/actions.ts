@@ -16,9 +16,8 @@ export async function getProducts() {
     {
       orderBy: [
         {
-          price: 'desc',
+          price: 'asc',
         },
-
       ]
     }
   );
