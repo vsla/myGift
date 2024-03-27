@@ -3,12 +3,12 @@ import React from 'react'
 type typeProps = 'primary' | 'secondary' | 'primarySmall'
 
 type ButtonProps = {
-  type: typeProps;
+  type?: typeProps;
   onClick: () => any;
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
-export const Button = ({ type, onClick, children }: ButtonProps) => {
+export const Button = ({ type = 'primary', onClick, children }: ButtonProps) => {
 
   const buttonClasses: { [key in typeProps]: string } = {
     primary: 'bg-blue-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-blue-600',

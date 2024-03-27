@@ -13,7 +13,7 @@ interface PromptProps {
   onClose: () => void;
 }
 
-const Prompt: React.FC<PromptProps> = ({ isOpen, onClose,
+const AddBuyerModal: React.FC<PromptProps> = ({ isOpen, onClose,
   productData: {
     id, imgUrl, productName, price, productLink
   }
@@ -145,4 +145,4 @@ const Prompt: React.FC<PromptProps> = ({ isOpen, onClose,
   );
 };
 
-export default Prompt;
+export default AddBuyerModal;

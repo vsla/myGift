@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { Product, ProductModalData } from '../types';
 import { GiftCard } from './GiftCard';
-import Prompt from './Prompt';
+import AddBuyerModal from './AddBuyerModal';
 
 interface GiftListProps {
   productsByCategory: { [key: string]: Array<Product> }
@@ -46,7 +46,7 @@ export const GiftList = ({ productsByCategory }: GiftListProps) => {
       })}
 
 
-      <Prompt
+      <AddBuyerModal
         productData={productData}
         isOpen={promptOpen}
         onClose={() => {
