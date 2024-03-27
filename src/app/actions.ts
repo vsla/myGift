@@ -11,7 +11,22 @@ type addBuyerProps = {
 
 interface StringMap { [key: string]: Product[]; }
 
+
 export async function getProducts() {
+  const products = await prisma.product.findMany(
+    {
+      orderBy: [
+        {
+          id: 'asc',
+        },
+      ]
+    }
+  );
+
+  return products
+}
+
+export async function getProductsByCategory() {
   const products = await prisma.product.findMany(
     {
       orderBy: [

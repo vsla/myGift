@@ -4,6 +4,7 @@ import { addBuyer } from '@/app/actions';
 import Image from 'next/image';
 import { ProductModalData } from '../types';
 import { revalidatePath } from 'next/cache'
+import { Button } from './Button';
 
 
 interface PromptProps {
@@ -94,24 +95,24 @@ const Prompt: React.FC<PromptProps> = ({ isOpen, onClose,
 
             <div className="flex items-center my-4">
               <p className="text-cyan-950 flex-grow  text-sm mr-2">{address}</p>
-              <button
+              <Button
                 onClick={handleCopyAddress}
-                className="bg-blue-500 text-white px-2 py-1 text-sm rounded-md hover:bg-blue-600"
+                type="primarySmall"
               >
                 Copiar
-              </button>
-              d</div>
+              </Button>
+            </div>
 
             <div className="border-b border-gray-300 my-4" />
             <div className='flex flex-row align-center mb-4'>
               <p className="text-base text-cyan-950 font-bold mr-2">Pix:</p>
               <p className="text-cyan-950 mr-4 flex-grow">{pixString}</p>
-              <button
+              <Button
                 onClick={handleCopyPix}
-                className="bg-blue-500 text-white px-2 py-1 text-sm rounded-md hover:bg-blue-600"
+                type="primarySmall"
               >
                 Copiar pix
-              </button>
+              </Button>
             </div>
 
 
@@ -126,15 +127,15 @@ const Prompt: React.FC<PromptProps> = ({ isOpen, onClose,
               className="w-full px-3 py-2 border border-gray-300 rounded-md mb-4 text-cyan-950 text-sm"
             />
             <div className="flex justify-end mt-4">
-              <button
+              <Button
                 onClick={handleSubmit}
-                className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-blue-600"
+                type='primary'
               >
                 Presentear
-              </button>
-              <button onClick={onClose} className="bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-400">
+              </Button>
+              <Button onClick={onClose} type='secondary' >
                 Cancelar
-              </button>
+              </Button>
             </div>
           </div>
         </div>
