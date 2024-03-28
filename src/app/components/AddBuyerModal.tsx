@@ -3,7 +3,6 @@ import { useRouter } from 'next/navigation';
 import { addBuyer } from '@/app/actions';
 import Image from 'next/image';
 import { ProductModalData } from '../types';
-import { revalidatePath } from 'next/cache'
 import { Button } from './Button';
 
 
@@ -97,7 +96,7 @@ const AddBuyerModal: React.FC<PromptProps> = ({ isOpen, onClose,
               <p className="text-cyan-950 flex-grow  text-sm mr-2">{address}</p>
               <Button
                 onClick={handleCopyAddress}
-                type="primarySmall"
+                variant="primarySmall"
               >
                 Copiar
               </Button>
@@ -109,7 +108,7 @@ const AddBuyerModal: React.FC<PromptProps> = ({ isOpen, onClose,
               <p className="text-cyan-950 mr-4 flex-grow">{pixString}</p>
               <Button
                 onClick={handleCopyPix}
-                type="primarySmall"
+                variant="primarySmall"
               >
                 Copiar pix
               </Button>
@@ -129,11 +128,11 @@ const AddBuyerModal: React.FC<PromptProps> = ({ isOpen, onClose,
             <div className="flex justify-end mt-4">
               <Button
                 onClick={handleSubmit}
-                type='primary'
+                variant='primary'
               >
                 Presentear
               </Button>
-              <Button onClick={onClose} type='secondary' >
+              <Button onClick={onClose} variant='secondary' >
                 Cancelar
               </Button>
             </div>

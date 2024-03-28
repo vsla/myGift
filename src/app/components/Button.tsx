@@ -1,14 +1,15 @@
+'use client';
 import React from 'react'
 
 type typeProps = 'primary' | 'secondary' | 'primarySmall'
 
-type ButtonProps = {
-  type?: typeProps;
-  onClick: () => any;
-  children?: React.ReactNode
+interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
+  variant?: typeProps;
+  onClick?: () => any;
+  children?: React.ReactNode;
 }
 
-export const Button = ({ type = 'primary', onClick, children }: ButtonProps) => {
+export const Button = ({ variant = 'primary', onClick, children, disabled }: ButtonProps) => {
 
   const buttonClasses: { [key in typeProps]: string } = {
     primary: 'bg-blue-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-blue-600',
@@ -17,7 +18,7 @@ export const Button = ({ type = 'primary', onClick, children }: ButtonProps) => 
   }
 
   return (
-    <button onClick={onClick} className={buttonClasses[type]}>
+    <button disabled={disabled} onClick={onClick} className={buttonClasses[variant]}>
       {children}
     </button>
   )

@@ -5,7 +5,7 @@ import React, { useEffect, useRef } from 'react';
 interface PromptProps {
   isOpen: boolean;
   onClose: () => void;
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 const Modal: React.FC<PromptProps> = ({ isOpen, onClose, children }) => {
