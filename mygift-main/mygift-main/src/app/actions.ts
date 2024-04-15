@@ -1,7 +1,7 @@
 "use server";
 import prisma from "../db";
 import { Product } from "types";
-
+import { upload } from "@vercel/blob/client";
 
 type addBuyerProps = {
   name?: string;
@@ -13,13 +13,13 @@ interface StringMap {
 }
 
 export async function createImageUrl(file: File, productName: string) {
-  // const productImageName = productName.split(" ").join("-");
-  // const newBlob = await upload(productImageName, file, {
-  //   access: "public",
-  //   handleUploadUrl: "/api/product-image",
-  // });
+  const productImageName = productName.split(" ").join("-");
+  const newBlob = await upload(productImageName, file, {
+    access: "public",
+    handleUploadUrl: "/api/product-image",
+  });
 
-  // return newBlob;
+  return newBlob;
 }
 
 export async function getProducts() {
