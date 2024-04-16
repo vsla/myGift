@@ -54,9 +54,8 @@ export const ProductList = ({ products }: { products: Product[] }) => {
             ) => (
               <tr
                 key={id}
-                className={`${
-                  rowId % 2 === 1 ? "bg-white-500" : "bg-gray-300"
-                }`}
+                className={`${rowId % 2 === 1 ? "bg-white-500" : "bg-gray-300"
+                  }`}
               >
                 <TableCell>{id}</TableCell>
                 <TableCell>{name}</TableCell>
@@ -77,7 +76,7 @@ export const ProductList = ({ products }: { products: Product[] }) => {
                 </TableCell>
                 <TableCell>
                   <Image
-                    src={"/images/" + imgUrl}
+                    src={imgUrl}
                     alt={name}
                     height={30}
                     width={30}

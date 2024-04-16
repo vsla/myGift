@@ -7,6 +7,15 @@ type addBuyerProps = {
   id: number;
 };
 
+type CreateProductProps = {
+  category: string,
+  description: string,
+  name: string,
+  price: number,
+  productImg: string,
+  productUrl: string,
+}
+
 interface StringMap {
   [key: string]: Product[];
 }
@@ -60,4 +69,19 @@ export async function addBuyer({ name, id }: addBuyerProps) {
     },
   });
   return newProduct;
+}
+
+export async function createProduct({
+  category, description, name, price, productUrl, productImg
+}: CreateProductProps) {
+  const products = await prisma.product.create({
+    data: {
+      category,
+      description,
+      imgUrl: productImg, name,
+      price, productLink: productUrl
+    }
+  });
+
+  return products;
 }

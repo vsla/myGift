@@ -17,7 +17,6 @@ export async function createImageUrl(productName: string) {
     Bucket: "products-my-gift",
     Key: process.env.AWS_S3_FOLDER + nowString + productName,
     Expires: 300,
-    ContentType: 'image/jpeg',
   })
 
   const uploadUrl = await s3.getSignedUrlPromise('putObject', params)

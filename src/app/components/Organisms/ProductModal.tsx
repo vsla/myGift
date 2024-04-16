@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Button, Modal, Input, Select } from "components/Atoms";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
-import { createImageUrl } from "../../actions";
+import { createImageUrl, createProduct } from "../../actions";
 // import { Loading } from "../Atoms/Loading";
 
 type Inputs = {
@@ -59,7 +59,7 @@ export const ProductModal = () => {
       await fetch(url, {
         method: "PUT",
         headers: {
-          "Content-Type": "multipart/form-data"
+          "Content-Type": "multipart/form-data",
         },
         body: productImg[0]
       })
@@ -73,12 +73,12 @@ export const ProductModal = () => {
       category,
       description,
       name,
-      price,
+      price: parseFloat(price),
       productImg: imageUrl,
       productUrl,
     };
 
-    // await createPro(newProduct)
+    await createProduct(newProduct)
     setIsSubmitting(false);
     handleCloseModal();
   };
