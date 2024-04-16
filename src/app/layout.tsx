@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +19,9 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={inter.className}>{children}</body>
+      <Script
+        type="text/javascript"
+        src="../../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"></Script>
     </html>
   );
 }
