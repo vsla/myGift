@@ -1,10 +1,10 @@
-import React from 'react'
-import Image from 'next/image'
-import { Product, ProductModalData } from '../types'
+import React from "react";
+import Image from "next/image";
+import { Product, ProductModalData } from "types";
 
 interface GiftCardProps {
   product: Product;
-  handleGift(productData: ProductModalData): any
+  handleGift(productData: ProductModalData): any;
 }
 
 export const GiftCard = ({
@@ -18,9 +18,8 @@ export const GiftCard = ({
     price,
     productLink,
   },
-  handleGift
+  handleGift,
 }: GiftCardProps) => {
-
   const handleOpenModalPresent = () => {
     const productModalData: ProductModalData = {
       id,
@@ -28,26 +27,35 @@ export const GiftCard = ({
       productName: name,
       price,
       productLink,
-    }
-    handleGift(productModalData)
-  }
+    };
+    handleGift(productModalData);
+  };
 
   return (
     <>
       <li key={id} className="bg-white p-3 rounded-lg shadow-md">
-        <div className='flex flex-row'>
+        <div className="flex flex-row">
           <div className="relative w-1/3 h-32 mb-2 mr-4">
             <Image
-              src={'https://nqlf3fajmhhx91c1.public.blob.vercel-storage.com/images/products/' + imgUrl} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              alt={name} fill className='object-contain' />
+              src={
+                "https://nqlf3fajmhhx91c1.public.blob.vercel-storage.com/images/products/" +
+                imgUrl
+              }
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              alt={name}
+              fill
+              className="object-contain"
+            />
           </div>
-          <div className='flex flex-col w-2/3'>
+          <div className="flex flex-col w-2/3">
             <h2 className="text-lg font-bold text-gray-900">{name}</h2>
             <p className="text-gray-600 leading-5 text-sm">{description}</p>
             {gifted ? (
-              <p className="text-green-500">Presenteado {giftedBy && `por: ${giftedBy}`}</p>
+              <p className="text-green-500">
+                Presenteado {giftedBy && `por: ${giftedBy}`}
+              </p>
             ) : (
-              <div className='flex justify-end items-end flex-grow'>
+              <div className="flex justify-end items-end flex-grow">
                 <button
                   onClick={handleOpenModalPresent}
                   className=" bg-blue-500 text-white w-full px-4 py-2 h-10 rounded-md hover:bg-blue-600 text-sm"
@@ -58,10 +66,7 @@ export const GiftCard = ({
             )}
           </div>
         </div>
-
-
       </li>
-
     </>
-  )
-}
+  );
+};

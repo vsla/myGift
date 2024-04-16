@@ -1,50 +1,87 @@
-'use server'
-import prisma from '../db';
-import { Product } from './types';
-
+"use server";
+import prisma from "../db";
+import { Product } from "types";
 
 type addBuyerProps = {
   name?: string;
-  id: number
+  id: number;
+};
+
+type CreateProductProps = {
+  category: string,
+  description: string,
+  name: string,
+  price: number,
+  productImg: string,
+  productUrl: string,
 }
 
-
-interface StringMap { [key: string]: Product[]; }
+interface StringMap {
+  [key: string]: Product[];
+}
 
 export async function getProducts() {
-  const products = await prisma.product.findMany(
-    {
-      orderBy: [
-        {
-          price: 'asc',
-        },
-      ]
-    }
-  );
+  const products = await prisma.product.findMany({
+    orderBy: [
+      {
+        id: "asc",
+      },
+    ],
+  });
 
-  const byCategoryProducts: StringMap = {}
+  return products;
+}
+
+export async function getProductsByCategory() {
+  const products = await prisma.product.findMany({
+    orderBy: [
+      {
+        price: "asc",
+      },
+    ],
+  });
+
+  const byCategoryProducts: StringMap = {};
 
   products.map((product) => {
-    const productCategory = product.category
+    const productCategory = product.category;
     if (!byCategoryProducts[productCategory]) {
-      byCategoryProducts[productCategory] = [product]
+      byCategoryProducts[productCategory] = [product];
     } else {
-      byCategoryProducts[productCategory] = [...byCategoryProducts[productCategory], product]
+      byCategoryProducts[productCategory] = [
+        ...byCategoryProducts[productCategory],
+        product,
+      ];
     }
-  })
+  });
 
-  return byCategoryProducts
+  return byCategoryProducts;
 }
 
 export async function addBuyer({ name, id }: addBuyerProps) {
   const newProduct = await prisma.product.update({
     where: {
-      id
+      id,
     },
     data: {
       gifted: true,
-      giftedBy: name || ''
+      giftedBy: name || "",
     },
   });
-  return newProduct
+  return newProduct;
+}
+
+export async function createProduct({
+  category, description, name, price, productUrl, productImg
+}: CreateProductProps) {
+  const products = await prisma.product.create({
+    data: {
+      category,
+      description,
+      imgUrl: productImg, name,
+      price, productLink: productUrl
+    }
+  });
+
+  return products;
 }

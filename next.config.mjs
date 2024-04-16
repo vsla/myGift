@@ -5,9 +5,9 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "nqlf3fajmhhx91c1.public.blob.vercel-storage.com",
+        hostname: "products-my-gift.s3.sa-east-1.amazonaws.com",
         port: "",
-        pathname: "/images/products/**",
+        pathname: "/**",
       },
     ],
   },
