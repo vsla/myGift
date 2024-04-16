@@ -2,7 +2,6 @@
 import prisma from "../db";
 import { Product } from "types";
 
-
 type addBuyerProps = {
   name?: string;
   id: number;
@@ -10,16 +9,6 @@ type addBuyerProps = {
 
 interface StringMap {
   [key: string]: Product[];
-}
-
-export async function createImageUrl(file: File, productName: string) {
-  // const productImageName = productName.split(" ").join("-");
-  // const newBlob = await upload(productImageName, file, {
-  //   access: "public",
-  //   handleUploadUrl: "/api/product-image",
-  // });
-
-  // return newBlob;
 }
 
 export async function getProducts() {

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Button, Modal, Input, Select } from "components/Atoms";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
-// import { createImageUrl } from "../../actions";
+import { createImageUrl } from "../../actions";
 // import { Loading } from "../Atoms/Loading";
 
 type Inputs = {
@@ -19,7 +19,7 @@ export const ProductModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { register, handleSubmit, watch, setValue } = useForm<Inputs>();
+  const { register, handleSubmit, watch, setValue, reset } = useForm<Inputs>();
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -28,6 +28,8 @@ export const ProductModal = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setIsSubmitting(false);
+    removeImageInput()
+    reset()
   };
 
   const removeImageInput = () => {
@@ -43,21 +45,40 @@ export const ProductModal = () => {
     productUrl,
   }: Inputs) => {
     setIsSubmitting(true);
+    let imageUrl = ''
 
-    // if (productImg?.length > 0) {
-    //   const uploadedImage = await createImageUrl(productImg[0], name);
-    // }
+    if (productImg?.length > 0) {
+
+      // const uploadedImage = await createImageUrl(productImg[0], name);
+      const { url } = await fetch('/api/product-image/', {
+        method: 'POST',
+        body: JSON.stringify({ name: name + '.' + imageFiles[0].name.split('.').pop() }),
+      }).then((res) => res.json() as Promise<{ url: string }>)
+      console.log(productImg[0])
+
+      await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "multipart/form-data"
+        },
+        body: productImg[0]
+      })
+
+      imageUrl = url.split('?')[0]
+      console.log(imageUrl)
+
+    }
 
     const newProduct = {
       category,
       description,
       name,
       price,
-      productImg,
+      productImg: imageUrl,
       productUrl,
     };
 
-    // await createProduct(newProduct)
+    // await createPro(newProduct)
     setIsSubmitting(false);
     handleCloseModal();
   };
