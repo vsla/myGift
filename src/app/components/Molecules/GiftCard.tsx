@@ -37,10 +37,7 @@ export const GiftCard = ({
         <div className="flex flex-row">
           <div className="relative w-1/3 h-32 mb-2 mr-4">
             <Image
-              src={
-                "https://nqlf3fajmhhx91c1.public.blob.vercel-storage.com/images/products/" +
-                imgUrl
-              }
+              src={imgUrl}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               alt={name}
               fill
