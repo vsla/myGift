@@ -33,6 +33,8 @@ export const Input = ({
       id={id}
       type={type}
       placeholder={placeholder}
+      onInvalid={e => (e.target as HTMLInputElement).setCustomValidity(`Campo ${LabelText} é obrigatório`)}
+      onInput={e => (e.target as HTMLInputElement).setCustomValidity('')}
       {...register(id)}
       {...props}
     ></input>
@@ -44,6 +46,8 @@ export const Input = ({
         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         id={id}
         placeholder={placeholder}
+        onInvalid={e => (e.target as HTMLInputElement).setCustomValidity(`Campo ${LabelText} é obrigatório`)}
+        onInput={e => (e.target as HTMLInputElement).setCustomValidity('')}
         {...register(id)}
       />
     );

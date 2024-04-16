@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import { Button, Modal, Input, Select } from "components/Atoms";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
-import { createImageUrl, createProduct } from "../../actions";
-// import { Loading } from "../Atoms/Loading";
+import { createProduct } from "../../actions";
+import { useRouter } from 'next/navigation';
+import { Loading } from "../Atoms/Loading";
 
 type Inputs = {
   category: string;
@@ -19,6 +20,7 @@ export const ProductModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const router = useRouter();
   const { register, handleSubmit, watch, setValue, reset } = useForm<Inputs>();
 
   const handleOpenModal = () => {
@@ -33,7 +35,7 @@ export const ProductModal = () => {
   };
 
   const removeImageInput = () => {
-    setValue("productImg", []);
+    if (!isSubmitting) setValue("productImg", []);
   };
 
   const onSubmit = async ({
@@ -81,6 +83,7 @@ export const ProductModal = () => {
     await createProduct(newProduct)
     setIsSubmitting(false);
     handleCloseModal();
+    router.refresh()
   };
 
   let imageFiles = watch("productImg");
@@ -93,33 +96,39 @@ export const ProductModal = () => {
           Create new product
         </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Input label="Name" id="name" register={register} />
+          <Input label="Name" id="name" required register={register} disabled={isSubmitting} />
 
-          <Input label="Price" id="price" register={register} />
+          <Input label="Price" step="0.01" type="number" required id="price" register={register} disabled={isSubmitting} />
 
           <Select
             label="Category"
             id="category"
+            required
             register={register}
             options={["Cozinha", "Geral", "Quarto", "Sala", "Banheiro"]}
+            disabled={isSubmitting}
           />
 
           <Input
             label="Description"
             id="description"
             isTextArea
+            required
             register={register}
+            disabled={isSubmitting}
           />
 
-          <Input label="Product URL" id="productUrl" register={register} />
+          <Input required label="Product URL" id="productUrl" register={register} disabled={isSubmitting} />
 
           <Input
             label="Product Image"
             id="productImg"
             type="file"
+            required
             multiple={false}
             accept=".jpg,.jpeg,.png"
             register={register}
+            disabled={isSubmitting}
           />
 
           {imageFiles && imageFiles.length > 0 && (
@@ -142,7 +151,7 @@ export const ProductModal = () => {
 
           <div className="flex flex-row flex-grow-1 items-center justify-end">
             <Button type="submit" disabled={isSubmitting}>
-              {!isSubmitting ? "Create Product" : "...submitting"}
+              {!isSubmitting ? "Create Product" : <div> <Loading /></div>}
             </Button>
             <Button variant="secondary" onClick={handleCloseModal}>
               Cancel
