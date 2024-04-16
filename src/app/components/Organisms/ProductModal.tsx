@@ -50,13 +50,10 @@ export const ProductModal = () => {
     let imageUrl = ''
 
     if (productImg?.length > 0) {
-
-      // const uploadedImage = await createImageUrl(productImg[0], name);
       const { url } = await fetch('/api/product-image/', {
         method: 'POST',
         body: JSON.stringify({ name: name + '.' + imageFiles[0].name.split('.').pop() }),
       }).then((res) => res.json() as Promise<{ url: string }>)
-      console.log(productImg[0])
 
       await fetch(url, {
         method: "PUT",
@@ -67,8 +64,6 @@ export const ProductModal = () => {
       })
 
       imageUrl = url.split('?')[0]
-      console.log(imageUrl)
-
     }
 
     const newProduct = {
