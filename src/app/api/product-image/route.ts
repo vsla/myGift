@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import aws from 'aws-sdk'
 
 
-export async function createImageUrl(productName: string) {
+async function createImageUrl(productName: string) {
 
   const s3 = new aws.S3({
     region: process.env.AWS_REGION,
