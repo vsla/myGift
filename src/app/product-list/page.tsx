@@ -4,6 +4,9 @@ import { Product } from "types";
 import { ProductList } from "components/Organisms/ProductList";
 import { ProductModal } from "components/Organisms/ProductModal";
 
+export const revalidate = 1;
+export const dynamic = "force-dynamic";
+
 const ProductTablePage = async () => {
   const products: Product[] = await getProducts();
 
